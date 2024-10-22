@@ -1,13 +1,9 @@
 { lib
 , mkDerivationWith
-, python3
 , python3Packages
-, fetchPypi
 , fetchFromGitHub
 , p7zip
 , archiveSupport ? true
-, cmake
-, mozjpeg
 }:
 mkDerivationWith python3Packages.buildPythonApplication rec {
   pname = "kcc";
@@ -24,8 +20,8 @@ mkDerivationWith python3Packages.buildPythonApplication rec {
     pip
   ];
 
-  propagatedBuildInputs = with python3Packages ; [
-    p7zip
+  propagatedBuildInputs = (with python3Packages ; [
+    packaging
     pillow
     pyqt5
     psutil
@@ -36,7 +32,7 @@ mkDerivationWith python3Packages.buildPythonApplication rec {
     mozjpeg_lossless_optimization
     distro
     pyside6
-  ];
+  ]) ++ [ p7zip ];
 
   qtWrapperArgs = lib.optionals archiveSupport [ "--prefix" "PATH" ":" "${ lib.makeBinPath [ p7zip ] }" ];
 
