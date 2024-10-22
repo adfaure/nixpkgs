@@ -1,11 +1,12 @@
-{ lib
-, python3Packages
-, fetchPypi
-, mailman
-, nixosTests
-, buildPythonPackage
-, mozjpeg
-, cmake
+{
+  lib,
+  python3Packages,
+  fetchPypi,
+  mailman,
+  nixosTests,
+  buildPythonPackage,
+  mozjpeg,
+  cmake,
 }:
 buildPythonPackage rec {
   pname = "mozjpeg_lossless_optimization";
@@ -20,7 +21,10 @@ buildPythonPackage rec {
   # This package needs cmake, but it is not the default builder
   dontUseCmakeConfigure = true;
 
-  nativeBuildInputs = [ mozjpeg cmake ];
+  nativeBuildInputs = [
+    mozjpeg
+    cmake
+  ];
   propagatedBuildInputs = [ python3Packages.cffi ];
 
   meta = with lib; {
