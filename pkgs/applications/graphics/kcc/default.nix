@@ -1,4 +1,4 @@
-{ lib, qt6, python3Packages, fetchFromGitHub, p7zip
+{ stdenv, lib, qt6, python3Packages, fetchFromGitHub, p7zip
 , archiveSupport ? true }:
 python3Packages.buildPythonApplication rec {
   pname = "kcc";
@@ -11,7 +11,7 @@ python3Packages.buildPythonApplication rec {
     hash = "sha256-61P4rsPRUJVrqv0xegxohRu7Yr8goSk7ElFV37GAYe8=";
   };
 
-  nativeBuildInputs = with python3Packages; [ qt6.wrapQtAppsHook ];
+  nativeBuildInputs = [ qt6.wrapQtAppsHook ];
 
   buildInputs = lib.optional stdenv.hostPlatform.isLinux qt6.qtwayland;
   propagatedBuildInputs = (with python3Packages; [
