@@ -1,6 +1,6 @@
-{ lib, mkDerivationWith, python3Packages, fetchFromGitHub, p7zip
+{ lib, qt6, python3Packages, fetchFromGitHub, p7zip
 , archiveSupport ? true }:
-mkDerivationWith python3Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "kcc";
   version = "6.2.0";
 
@@ -11,12 +11,12 @@ mkDerivationWith python3Packages.buildPythonApplication rec {
     hash = "sha256-61P4rsPRUJVrqv0xegxohRu7Yr8goSk7ElFV37GAYe8=";
   };
 
-  nativeBuildInputs = with python3Packages; [ pip ];
+  nativeBuildInputs = with python3Packages; [ qt6.wrapQtAppsHook ];
 
+  buildInputs = lib.optional stdenv.hostPlatform.isLinux qt6.qtwayland;
   propagatedBuildInputs = (with python3Packages; [
     packaging
     pillow
-    pyqt5
     psutil
     python-slugify
     raven
@@ -25,7 +25,7 @@ mkDerivationWith python3Packages.buildPythonApplication rec {
     mozjpeg_lossless_optimization
     distro
     pyside6
-  ]) ++ [ p7zip ];
+  ]);
 
   qtWrapperArgs = lib.optionals archiveSupport [
     "--prefix"
