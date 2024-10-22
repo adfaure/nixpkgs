@@ -7,13 +7,13 @@
 }:
 mkDerivationWith python3Packages.buildPythonApplication rec {
   pname = "kcc";
-  version = "6.1.0";
+  version = "6.2.0";
 
   src = fetchFromGitHub {
     owner = "ciromattia";
-    repo = "${pname}";
-    rev = "v${version}";
-    hash = "sha256-CU068e7fLPn0hW+yfm1qRp8bX8/jvAYz2g715CIHa/Q=";
+    repo = "kcc";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-61P4rsPRUJVrqv0xegxohRu7Yr8goSk7ElFV37GAYe8=";
   };
 
   nativeBuildInputs = with python3Packages; [
