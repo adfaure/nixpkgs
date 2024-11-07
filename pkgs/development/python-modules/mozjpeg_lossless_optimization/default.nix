@@ -14,13 +14,14 @@ buildPythonPackage rec {
   src = fetchPypi {
     inherit version;
     pname = "mozjpeg-lossless-optimization";
-    sha256 = "sha256-cl2Ydy6UP8oYsIAcuU5kXEd/9S5WrQsnvdt23fCRyj4=";
+    hash = "sha256-cl2Ydy6UP8oYsIAcuU5kXEd/9S5WrQsnvdt23fCRyj4=";
   };
 
   # This package needs cmake, but it is not the default builder
   dontUseCmakeConfigure = true;
 
-  nativeBuildInputs = [ mozjpeg cmake ];
+  buildInputs = [ mozjpeg ];
+  nativeBuildInputs = [ cmake ];
   propagatedBuildInputs = [ python3Packages.cffi ];
 
   meta = with lib; {
