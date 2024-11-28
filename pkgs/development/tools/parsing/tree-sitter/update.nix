@@ -91,6 +91,7 @@ let
     "go-tree-sitter"
     # kotlin bindings to the Tree-sitter parsing library
     "kotlin-tree-sitter"
+    "zig-tree-sitter"
 
     # Non-grammar repositories
     ".github"
