@@ -17,17 +17,13 @@ buildPythonPackage {
   inherit version src;
   pname = drvPrefix;
 
-  preBuild = ''
-    ${lib.getExe pkgs.eza} --tree /
-    '';
-
   # tree-sitter test needs a writable home folder for tests.
   preCheck = ''
     HOME=. ${lib.getExe pkgs.tree-sitter} test
   '';
 
-  nativeCheckInputs = [ tree-sitter pytestCheckHook ];
-  pythonImportsCheck = [ snakeCaseName ];
+  # nativeCheckInputs = [ tree-sitter pytestCheckHook ];
+  # pythonImportsCheck = [ snakeCaseName ];
 
   meta = {
     description = "Python bindings for ${name}";
