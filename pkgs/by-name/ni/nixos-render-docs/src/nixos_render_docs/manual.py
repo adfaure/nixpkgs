@@ -312,10 +312,13 @@ class ManualHTMLRenderer(RendererMixin, HTMLRenderer):
 
         scripts = self._html_params.scripts
         if self._redirects:
+            # Output file
             redirects_path = f'{self._base_path}/{toc.target.path.split('.html')[0]}-redirects.js'
+            # Src for the <script> tag
+            redirects_src = f'./{toc.target.path.split('.html')[0]}-redirects.js'
             with open(redirects_path, 'w') as file:
                 file.write(self._redirects.get_redirect_script(toc.target.path))
-            scripts.append(redirects_path)
+            scripts.append(redirects_src)
 
         return "\n".join([
             '<?xml version="1.0" encoding="utf-8" standalone="no"?>',
